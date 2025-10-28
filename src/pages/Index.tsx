@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import Icon from "@/components/ui/icon";
 import { Separator } from "@/components/ui/separator";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Index = () => {
   return (
@@ -54,7 +55,7 @@ const Index = () => {
 
       <section id="contests" className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto">
-          <div className="text-center mb-16">
+          <div className={`text-center mb-16 animate-on-scroll ${useScrollAnimation().isVisible ? 'is-visible' : ''}`} ref={useScrollAnimation().ref as any}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Текущие конкурсы</h2>
             <p className="text-lg text-muted-foreground">Выбери свой путь к славе</p>
           </div>
@@ -63,8 +64,10 @@ const Index = () => {
               { title: "Драматический актёр", roles: 5, participants: 234, deadline: "30 дней", icon: "Drama" },
               { title: "Комедийный талант", roles: 3, participants: 189, deadline: "45 дней", icon: "Laugh" },
               { title: "Мюзикл 2025", roles: 8, participants: 312, deadline: "60 дней", icon: "Music" }
-            ].map((contest, idx) => (
-              <Card key={idx} className="hover-scale bg-card/50 backdrop-blur border-border/50 hover:border-primary/50 transition-all">
+            ].map((contest, idx) => {
+              const { ref, isVisible } = useScrollAnimation();
+              return (
+              <Card key={idx} ref={ref as any} className={`hover-scale bg-card/50 backdrop-blur border-border/50 hover:border-primary/50 transition-all animate-on-scroll ${isVisible ? 'is-visible' : ''} animate-on-scroll-delay-${idx + 1}`}>
                 <CardHeader>
                   <div className="flex items-start justify-between mb-4">
                     <div className="p-3 bg-primary/10 rounded-lg">
@@ -95,19 +98,19 @@ const Index = () => {
                   </Button>
                 </CardContent>
               </Card>
-            ))}
+            );})}
           </div>
         </div>
       </section>
 
       <section id="education" className="py-20 px-4">
         <div className="container mx-auto">
-          <div className="text-center mb-16">
+          <div className={`text-center mb-16 animate-on-scroll ${useScrollAnimation().isVisible ? 'is-visible' : ''}`} ref={useScrollAnimation().ref as any}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Программа обучения</h2>
             <p className="text-lg text-muted-foreground">Профессиональная подготовка с нуля</p>
           </div>
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/30">
+            <Card className={`bg-gradient-to-br from-primary/10 to-primary/5 border-primary/30 animate-on-scroll ${useScrollAnimation().isVisible ? 'is-visible' : ''} animate-on-scroll-delay-1`} ref={useScrollAnimation().ref as any}>
               <CardHeader>
                 <div className="p-4 bg-primary/20 rounded-lg w-fit mb-4">
                   <Icon name="Theater" size={40} className="text-primary" />
@@ -132,7 +135,7 @@ const Index = () => {
                 </ul>
               </CardContent>
             </Card>
-            <Card className="bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/30">
+            <Card className={`bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/30 animate-on-scroll ${useScrollAnimation().isVisible ? 'is-visible' : ''} animate-on-scroll-delay-2`} ref={useScrollAnimation().ref as any}>
               <CardHeader>
                 <div className="p-4 bg-secondary/20 rounded-lg w-fit mb-4">
                   <Icon name="Mic" size={40} className="text-secondary" />
@@ -163,7 +166,7 @@ const Index = () => {
 
       <section id="voting" className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-16">
+          <div className={`text-center mb-16 animate-on-scroll ${useScrollAnimation().isVisible ? 'is-visible' : ''}`} ref={useScrollAnimation().ref as any}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Система голосования</h2>
             <p className="text-lg text-muted-foreground">Справедливый отбор лучших талантов</p>
           </div>
@@ -193,8 +196,10 @@ const Index = () => {
                 desc: "5 главных ролей, 20 эпизодических, 100 на массовку",
                 icon: "Star"
               }
-            ].map((item, idx) => (
-              <Card key={idx} className="hover-scale border-border/50 hover:border-primary/50 transition-all">
+            ].map((item, idx) => {
+              const { ref, isVisible } = useScrollAnimation();
+              return (
+              <Card key={idx} ref={ref as any} className={`hover-scale border-border/50 hover:border-primary/50 transition-all animate-on-scroll ${isVisible ? 'is-visible' : ''} animate-on-scroll-delay-${idx + 1}`}>
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     <div className="flex-shrink-0 w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center text-2xl font-bold text-primary">
@@ -208,14 +213,14 @@ const Index = () => {
                   </div>
                 </CardHeader>
               </Card>
-            ))}
+            );})}
           </div>
         </div>
       </section>
 
       <section id="pricing" className="py-20 px-4">
         <div className="container mx-auto">
-          <div className="text-center mb-16">
+          <div className={`text-center mb-16 animate-on-scroll ${useScrollAnimation().isVisible ? 'is-visible' : ''}`} ref={useScrollAnimation().ref as any}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Тарифные планы</h2>
             <p className="text-lg text-muted-foreground">Выбери подходящий вариант участия</p>
           </div>
@@ -242,8 +247,10 @@ const Index = () => {
                 features: ["Неограниченные конкурсы", "Полная программа обучения", "Приоритетная поддержка", "Расширенный профиль", "Доступ к архивам"],
                 popular: true
               }
-            ].map((plan, idx) => (
-              <Card key={idx} className={`relative hover-scale ${plan.popular ? 'border-primary bg-gradient-to-b from-primary/10 to-transparent' : ''}`}>
+            ].map((plan, idx) => {
+              const { ref, isVisible } = useScrollAnimation();
+              return (
+              <Card key={idx} ref={ref as any} className={`relative hover-scale ${plan.popular ? 'border-primary bg-gradient-to-b from-primary/10 to-transparent' : ''} animate-on-scroll ${isVisible ? 'is-visible' : ''} animate-on-scroll-delay-${idx + 1}`}>
                 {plan.popular && (
                   <div className="absolute -top-4 left-0 right-0 flex justify-center">
                     <Badge className="bg-secondary text-secondary-foreground px-6 py-1">
@@ -275,18 +282,18 @@ const Index = () => {
                   </Button>
                 </CardContent>
               </Card>
-            ))}
+            );})}
           </div>
         </div>
       </section>
 
       <section id="agencies" className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-16">
+          <div className={`text-center mb-16 animate-on-scroll ${useScrollAnimation().isVisible ? 'is-visible' : ''}`} ref={useScrollAnimation().ref as any}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Для кастинг-агентств</h2>
             <p className="text-lg text-muted-foreground">Зарабатывайте с партнёрской программой</p>
           </div>
-          <Card className="bg-gradient-to-br from-accent/10 to-accent/5 border-accent/30">
+          <Card className={`bg-gradient-to-br from-accent/10 to-accent/5 border-accent/30 animate-on-scroll ${useScrollAnimation().isVisible ? 'is-visible' : ''}`} ref={useScrollAnimation().ref as any}>
             <CardHeader className="text-center">
               <div className="p-4 bg-accent/20 rounded-lg w-fit mx-auto mb-4">
                 <Icon name="Handshake" size={48} className="text-accent" />
@@ -320,7 +327,7 @@ const Index = () => {
       </section>
 
       <section className="py-20 px-4">
-        <div className="container mx-auto max-w-3xl text-center">
+        <div className={`container mx-auto max-w-3xl text-center animate-on-scroll ${useScrollAnimation().isVisible ? 'is-visible' : ''}`} ref={useScrollAnimation().ref as any}>
           <Icon name="MessageCircle" size={64} className="text-primary mx-auto mb-6" />
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Встроенный мессенджер</h2>
           <p className="text-lg text-muted-foreground mb-8">
